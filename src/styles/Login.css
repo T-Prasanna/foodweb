@@ -1,0 +1,108 @@
+/* Login Page Background */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
+}
+
+/* Login Form */
+.login-form {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  margin-top: 20px;
+}
+
+/* Labels */
+.login-form label {
+  font-weight: 600;
+  color: #e4e4e4;
+}
+
+/* Inputs */
+.login-form .form-control {
+  background: #1c1c1c;
+  border: 1px solid #444;
+  color: white;
+}
+
+.login-form .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+}
+
+/* Buttons */
+.login-form .btn-danger {
+  width: 100%;
+  background: #dc3545;
+  border: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login-form .btn-danger:hover {
+  background: #bb2d3b;
+  transform: scale(1.05);
+}
+/* Container form */
+.container form {
+  background-color: #212529 !important; /* dark background */
+  color: #ffffff !important; /* white text */
+}
+
+/* Labels */
+.container form .form-label {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Inputs */
+.container form .form-control {
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+}
+
+/* Input placeholders */
+.container form .form-control::placeholder {
+  color: #bbbbbb !important;
+  opacity: 1;
+}
+
+/* Focused inputs */
+.container form .form-control:focus {
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border-color: #198754 !important; /* bootstrap green */
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.6);
+}
+
+/* Buttons */
+.container form .btn-success {
+  background-color: #198754 !important;
+  border: none !important;
+  font-weight: 600;
+}
+
+.container form .btn-danger {
+  background-color: #dc3545 !important;
+  border: none !important;
+  font-weight: 600;
+}
+
+/* Buttons hover effect */
+.container form .btn-success:hover {
+  background-color: #157347 !important;
+}
+
+.container form .btn-danger:hover {
+  background-color: #bb2d3b !important;
+}

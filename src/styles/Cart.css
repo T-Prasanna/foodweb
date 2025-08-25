@@ -1,0 +1,109 @@
+/* ✅ Empty cart message */
+.empty-cart {
+  margin: 50px auto;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: hsl(204, 24%, 96%);
+}
+
+/* ✅ Table container */
+.cart-container {
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 12px;
+  
+}
+
+/* ✅ Table styling */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-table th {
+  background: #198754;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px;
+  text-align: center;
+}
+
+.cart-table td {
+  text-align: center;
+  padding: 10px;
+  font-size: 1rem;
+  
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* ✅ Row hover effect */
+.cart-table tr:hover {
+  background-color: #f8f9fa;
+  transition: 0.2s ease-in-out;
+}
+
+/* ✅ Total price */
+.cart-total {
+  margin-top: 20px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #198754;
+}
+
+/* ✅ Checkout button */
+.checkout-btn {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #d41111;
+  background-color: #198754;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #157347;
+  transform: scale(1.05);
+}
+/* Make all text inside the cart white */
+.cart-container {
+  color: white;
+}
+
+/* Table headers and body text */
+.cart-container table th,
+.cart-container table td {
+  color: white;
+}
+
+/* Total price */
+.cart-container h1,
+.cart-container h2,
+.cart-container h3 {
+  color: white;
+}
+
+/* Empty cart message */
+.empty-cart {
+  color: white;
+}
+
+/* Checkout button */
+.cart-container .btn {
+  color: white;
+}
+.delete-btn {
+  background: transparent !important;
+  border: none !important;
+  color: red !important;   /* makes the delete icon red */
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  color: darkred !important; /* darker red on hover */
+}

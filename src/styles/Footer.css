@@ -1,0 +1,32 @@
+/* ✅ Full screen container */
+.footer-center {
+  display: flex;
+  justify-content: center;   /* horizontal center */
+  align-items: center;       /* vertical center */
+  height: 30vh;             /* full page height */
+  background-color: #f8f9fa;
+}
+
+/* ✅ Footer box styling */
+.footer-box {
+  text-align: center;
+  border: 2px solid #198754;
+  border-radius: 12px;
+  padding: 25px 50px;
+  background: #ffffff;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Text styling */
+.footer-text {
+  color: #6c757d;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.footer-contact {
+  color: #198754;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 6px 0;
+}

@@ -1,0 +1,81 @@
+/* Navbar main */
+.navbar {
+  background: linear-gradient(90deg, #198754, #157347);
+  padding: 0.8rem 1.5rem;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Brand (FOOD logo) */
+.navbar-brand {
+  font-size: 2rem !important;
+  font-weight: bold;
+  color: #fff !important;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #441c1f !important;
+}
+
+/* Nav links */
+.nav-link {
+  color: #fff !important;
+  font-size: 1.1rem;
+  margin: 0 0.5rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #5c2727 !important;
+}
+
+/* Cart button */
+.btn.bg-white.text-success {
+  border-radius: 25px;
+  font-weight: 500;
+  padding: 6px 16px;
+  transition: all 0.3s ease;
+}
+
+.btn.bg-white.text-success:hover {
+  background-color: #198754;
+  color: rgb(70, 10, 10) !important;
+  box-shadow: 0px 4px 12px rgba(25, 135, 84, 0.3);
+}
+
+/* Cart badge styling */
+.MuiBadge-badge {
+  background-color: #ff070f !important;
+  color: #000 !important;
+  font-weight: bold;
+}
+
+/* Logout button */
+button.btn.bg-white.text-success {
+  border-radius: 25px;
+  font-weight: 500;
+  margin-left: 10px;
+  padding: 6px 16px;
+}
+
+button.btn.bg-white.text-success:hover {
+  background-color: #dc3545;
+  color: rgb(82, 19, 19) !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-link {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.6rem !important;
+  }
+}

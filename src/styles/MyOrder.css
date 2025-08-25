@@ -1,0 +1,75 @@
+/* Container Styling */
+.container {
+  color: rgb(13, 12, 12); /* Make text white */
+}
+
+/* Heading */
+.container h2 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #28a745; /* Green heading */
+}
+
+/* Order Card */
+.order-card {
+  background-color: #1e1e1e; /* Dark background */
+  border: 1px solid #28a745; /* Green border */
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease-in-out;
+}
+
+.order-card:hover {
+  transform: scale(1.01);
+}
+
+/* Order Date */
+.order-card h5 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1f1e1e; /* Yellow for date */
+  margin-bottom: 15px;
+}
+
+/* Table Styling */
+.order-table {
+  background-color: transparent;
+  border-collapse: collapse;
+  width: 100%;
+  color: rgb(37, 35, 35);
+}
+
+.order-table th {
+  background-color: #28a745;
+  color: rgb(23, 22, 22);
+  text-align: center;
+  padding: 8px;
+}
+
+.order-table td {
+  text-align: center;
+  padding: 8px;
+  
+}
+
+/* Empty Orders Text */
+.no-orders {
+  text-align: center;
+  color: #100f0f;
+  font-style: italic;
+  margin-top: 30px;
+}
+.order-card h5 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: black !important; /* force black color */
+  margin-bottom: 15px;
+}
+.order-title {
+  color: rgb(218, 81, 81);
+  font-weight: bold;
+  margin-bottom: 15px;
+}
