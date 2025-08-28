@@ -1,38 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import '../styles/MyOrder.css';
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import api from "../api"; // ✅ Correct import
+import "../styles/MyOrder.css";
+
 export default function MyOrder() {
-  const [orderData, setOrderData] = useState([])
+  const [orderData, setOrderData] = useState([]);
 
   const fetchMyOrder = async () => {
-    let userEmail = localStorage.getItem("userEmail")
+    let userEmail = localStorage.getItem("userEmail");
 
     try {
-      let response = await fetch("http://localhost:5000/api/auth/myOrderData", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email: userEmail })
-      })
-
-      let res = await response.json()
-      console.log("MyOrders Response:", res)
-
-      if (res.success) {
-        setOrderData(res.orderData)
+      const response = await api.post("/api/auth/myOrderData", { email: userEmail });
+      if (response.data.success) {
+        setOrderData(response.data.orderData);
       } else {
-        setOrderData([])
+        setOrderData([]);
       }
     } catch (error) {
-      console.error("Fetch MyOrders Error:", error)
+      console.error("Fetch MyOrders Error:", error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchMyOrder()
-  }, [])
+    fetchMyOrder();
+  }, []);
 
   return (
     <div>
@@ -44,8 +36,10 @@ export default function MyOrder() {
           <p>No orders found.</p>
         ) : (
           orderData.map((order, orderIndex) => (
-            <div key={orderIndex} className="mb-4 p-3 border rounded shadow-sm bg-light">
-              {/* Each order contains an array of items, with first element as Order_date */}
+            <div
+              key={orderIndex}
+              className="mb-4 p-3 border rounded shadow-sm bg-light"
+            >
               <h4 className="order-title">Order Details</h4>
               <h5>
                 Date:{" "}
@@ -56,7 +50,7 @@ export default function MyOrder() {
               <table className="table table-sm table-striped">
                 <thead>
                   <tr>
-                    <th></th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Qty</th>
                     <th>Size</th>
@@ -70,7 +64,7 @@ export default function MyOrder() {
                       <td>{item.name}</td>
                       <td>{item.qty}</td>
                       <td>{item.size}</td>
-                      <td>{item.price}</td>
+                      <td>₹{item.price}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -81,5 +75,5 @@ export default function MyOrder() {
       </div>
       <Footer />
     </div>
-  )
+  );
 }

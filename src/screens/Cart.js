@@ -2,7 +2,7 @@ import React from 'react'
 import Delete from '@material-ui/icons/Delete'
 import { useCart, useDispatchCart } from '../components/ContextReducer';
 import '../styles/Cart.css';
-
+import api from "../api"; 
 export default function Cart() {
   let data = useCart();
   let dispatch = useDispatchCart();
@@ -16,35 +16,26 @@ export default function Cart() {
   }
 
   const handleCheckOut = async () => {
-    let userEmail = localStorage.getItem("userEmail");
+  let userEmail = localStorage.getItem("userEmail");
 
-    try {
-      let response = await fetch("http://localhost:5000/api/auth/orderData", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          order_data: data,
-          email: userEmail,
-          order_date: new Date().toISOString()
-        })
-      });
+  try {
+    const response = await api.post("/api/auth/orderData", {
+      order_data: data,
+      email: userEmail,
+      order_date: new Date().toISOString()
+    });
 
-      let res = await response.json();
-      console.log("Checkout Response:", res);
-
-      if (res.success) {
-        alert("✅ Order placed successfully!");
-        dispatch({ type: "DROP" });
-      } else {
-        alert("⚠️ Order failed. Please try again.");
-      }
-    } catch (error) {
-      console.error("Checkout Error:", error);
-      alert("❌ Something went wrong!");
+    if (response.data.success) {
+      alert("✅ Order placed successfully!");
+      dispatch({ type: "DROP" });
+    } else {
+      alert("⚠️ Order failed. Please try again.");
     }
-  };
+  } catch (error) {
+    console.error("Checkout Error:", error);
+    alert("❌ Something went wrong!");
+  }
+};
 
   let totalPrice = data.reduce((total, food) => total + food.price, 0);
 

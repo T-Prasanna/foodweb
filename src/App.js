@@ -4,6 +4,8 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import Home from './screens/Home';
+
+
 import {
   BrowserRouter as Router,
   Routes,
