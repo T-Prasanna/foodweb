@@ -1,154 +1,120 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar';
 import '../styles/Signup.css';
-import api from "../api";
 
 export default function Signup() {
-  const [credentials, setCredentials] = useState({
-    name: "",
-    email: "",
-    password: "",
-    geolocation: ""
-  });
-  const [address, setAddress] = useState("");
-  const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ name: "", email: "", password: "", geolocation: "" })
+  let [address, setAddress] = useState("");
+  let navigate = useNavigate()
 
-  // ✅ Get Location
   const handleClick = async (e) => {
     e.preventDefault();
-    try {
-      let navLocation = () => {
-        return new Promise((res, rej) => {
-          navigator.geolocation.getCurrentPosition(res, rej);
-        });
-      };
 
-      let [lat, long] = await navLocation().then(res => [res.coords.latitude, res.coords.longitude]);
-
-      const response = await api.post("/api/auth/getlocation", {
-        latlong: { lat, long }
+    let navLocation = () => {
+      return new Promise((res, rej) => {
+        navigator.geolocation.getCurrentPosition(res, rej);
       });
-
-      setAddress(response.data.location);
-      setCredentials({ ...credentials, geolocation: response.data.location });
-    } catch (error) {
-      console.error("Location Error:", error);
-      alert("Could not fetch location. Please enter your address manually.");
     }
-  };
 
-  // ✅ Signup Submit
+    let latlong = await navLocation().then(res => {
+      let latitude = res.coords.latitude;
+      let longitude = res.coords.longitude;
+      return [latitude, longitude]
+    })
+
+    let [lat, long] = latlong
+    console.log(lat, long)
+
+    const response = await fetch("https://food-backend-1-y86j.onrender.com/api/auth/getlocation", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ latlong: { lat, long } })
+    });
+
+    const { location } = await response.json()
+    console.log(location);
+    setAddress(location);
+    setCredentials({ ...credentials, geolocation: location })   // ✅ FIX
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await api.post("/api/auth/createuser", {
+
+    const response = await fetch("https://food-backend-1-y86j.onrender.com/api/auth/createuser", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         name: credentials.name,
         email: credentials.email,
         password: credentials.password,
-        location: credentials.geolocation || address
-      });
+        location: credentials.geolocation
+      })
+    });
 
-      if (response.data.success) {
-        localStorage.setItem("token", response.data.authToken);
-        navigate("/login");
-      } else {
-        alert("Enter Valid Credentials");
-      }
-    } catch (error) {
-      console.error("Signup Error:", error);
-      alert("Something went wrong while signing up!");
+    const json = await response.json()
+    console.log(json);
+
+    if (json.success) {
+      // Save the auth token and redirect
+      localStorage.setItem('token', json.authToken)
+      navigate("/login")
+    } else {
+      alert("Enter Valid Credentials")
     }
-  };
+  }
 
-  // ✅ Input Change
   const onChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
+    setCredentials({ ...credentials, [e.target.name]: e.target.value })
+  }
 
   return (
-    <div
-      style={{
-        backgroundImage: 'url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg")',
-        backgroundSize: "cover",
-        height: "100vh",
-      }}
-    >
-      <Navbar />
-      <div className="container">
-        <form
-          className="w-50 m-auto mt-5 border bg-dark border-success rounded p-4"
-          onSubmit={handleSubmit}
-        >
-          <h2 className="text-center text-light">Signup</h2>
+    <div style={{
+      backgroundImage: 'url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+      backgroundSize: 'cover',
+      height: '100vh'
+    }}>
+      <div>
+        <Navbar />
+      </div>
 
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label text-light">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              value={credentials.name}
-              onChange={onChange}
-              required
-            />
+      <div className='container'>
+        <form className='w-50 m-auto mt-5 border bg-dark border-success rounded' onSubmit={handleSubmit}>
+          <div className="m-3">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input type="text" className="form-control" name='name' value={credentials.name} onChange={onChange} />
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label text-light">Email</label>
-            <input
-              type="email"
-              className="form-control"
-              name="email"
-              value={credentials.email}
-              onChange={onChange}
-              required
-            />
+          <div className="m-3">
+            <label htmlFor="email" className="form-label">Email address</label>
+            <input type="email" className="form-control" name='email' value={credentials.email} onChange={onChange} />
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label text-light">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              value={credentials.password}
-              onChange={onChange}
-              required
-            />
+          <div className="m-3">
+            <label htmlFor="address" className="form-label">Address</label>
+            <fieldset>
+              <input type="text" className="form-control" name='address'
+                placeholder='"Click below for fetching address"'
+                value={address}
+                onChange={(e) => setAddress(e.target.value)} />
+            </fieldset>
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="geolocation" className="form-label text-light">Location</label>
-            <input
-              type="text"
-              className="form-control"
-              name="geolocation"
-              value={credentials.geolocation || address}
-              onChange={onChange}
-              placeholder="Click 'Get Location' or enter manually"
-            />
-          </div>
-
-          <div className="d-flex justify-content-between">
-            <button
-              type="button"
-              className="btn btn-success"
-              onClick={handleClick}
-            >
-              Get Location
-            </button>
-
-            <button type="submit" className="btn btn-primary">
-              Signup
+          <div className="m-3">
+            <button type="button" onClick={handleClick} name="geolocation" className="btn btn-success">
+              Click for current Location
             </button>
           </div>
 
-          <p className="text-center text-light mt-3">
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
+          <div className="m-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+            <input type="password" className="form-control" value={credentials.password} onChange={onChange} name='password' />
+          </div>
+
+          <button type="submit" className="m-3 btn btn-success">Submit</button>
+          <Link to="/login" className="m-3 mx-1 btn btn-danger">Already a user</Link>
         </form>
       </div>
     </div>
-  );
+  )
 }
